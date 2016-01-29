@@ -91,7 +91,7 @@
 					<p>Quelques définitions</p>
 				</section>
 				<section>
-					<h2>WebGL</h2>
+					<h3>WebGL</h3>
 					<p>
 						WebGL est une spécification d'affichage 3D pour les navigateurs web, créée par Khronos Group permettant d'utiliser le standard OpenGL ES via les élements canvas du HTML5
 					</p>
@@ -120,7 +120,7 @@
 					<h2>Concepts de base</h2>
 				</section>
 				<section>
-					<h3>Initialiser babylonJS et la scene de rendu</h3>
+					<h3>1 - Initialiser babylonJS et la scene de rendu</h3>
 				</section>
 				<section>
 					<h3>HTML</h3>
@@ -164,12 +164,31 @@ window.addEventListener('DOMContentLoaded', function() {
 	// On charge le moteur BabylonJS lié à notre élément
 	var engine = new BABYLON.Engine(canvas, true);
 
+	// Notre fonction createScene
+	var createScene = function(){
+
+		// On créé notre Object scene
+		var scene = new BABYLON.Scene(engine);
+		scene.clearColor = new BABYLON.Color3( 254, 254, 254);
+
+	}
+
 });
 						</code></pre>
 						<p>Le moteur est initialisé et prêt à fonctionner</p>
 						<p>...</p>
 				</section>
 				<section data-background="http://i.giphy.com/90F8aUepslB84.gif"></section>
+
+				<section>
+					<h3>2 - Créer des élément</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+
+	// On attribut la variable canvas à notre élément ajouté dans le DOM
+	var canvas = document.getElementById('davidooCanvas');
+
+						</code></pre>
+				</section>
 
 		</section>
 
