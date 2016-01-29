@@ -57,105 +57,121 @@
 			</section>
 
 			<section>
-				<section>
-					<h2>Qu'allons nous aborder ?</h2>
+				<section id="fragments">
+					<h2>Introduction</h2>
+					<p class="fragment">1- WebGL</p>
+					<p class="fragment">2- BabylonJS</p>
 				</section>
+				<section id="fragments">
+					<h2>Concepts de base</h2>
+					<p class="fragment">1- Initialiser babylonJS</p>
+					<p class="fragment">2- Créer un élément</p>
+					<p class="fragment">3- Les vues</p>
+					<p class="fragment">4- La lumière</p>
+					<p class="fragment">5- Animer des objets</p>
+					<p class="fragment">6- Les actions</p>
+				</section>
+				<section>
+					<h2>Utilisation avancée</h2>
+					<p class="fragment">1- Importer des mesh</p>
+					<p class="fragment">2- Texturing</p>
+					<p class="fragment">3- Intéractions</p>
+				</section>
+				<section>
+					<h2>Infos supplémentaires</h2>
+					<p class="fragment">1- La compatibilité</p>
+					<p class="fragment">2- Les ressources/calculs</p>
+					<p class="fragment">3- Liens intéssants</p>
+				</section>
+			</section>
+
+			<section>
 				<section>
 					<h2>Introduction</h2>
-					<ol>
-						<li>WebGL</li>
-						<li>A quoi sert BabylonJS ?</li>
-					</ol>
+					<p>Quelques définitions</p>
 				</section>
 				<section>
-					<h2>A - Concepts de base</h2>
-					<ol>
-						<li>Initialiser babylonJS</li>
-						<li>Créer un élément</li>
-						<li>Gestion des vues</li>
-						<li>Sources de lumière</li>
-						<li>Animer des objets</li>
-						<li>Les actions</li>
-					</ol>
+					<h2>WebGL</h2>
+					<p>
+						WebGL est une spécification d'affichage 3D pour les navigateurs web, créée par Khronos Group permettant d'utiliser le standard OpenGL ES via les élements canvas du HTML5
+					</p>
+					<h5>Il s'appuie en plus sur différents languages et technologies:</h5>
+					<ul>
+						<li>Html5 / Canvas</li>
+						<li>JavaScript</li>
+						<li>Données au format JSON</li>
+						<li>Accélération matérielle pour les calculs et le rendu 3D à l'aide des pilotes OpenGL ES</li>
+					</ul>
+					<p>Christian entrerra plus dans les détails sur ce sujet :-)</p>
 				</section>
 				<section>
-					<h2>B - Utilisation avancée</h2>
-					<ol>
-						<li>Importer des mesh</li>
-						<li>Texturing</li>
-						<li>Intéractions</li>
-					</ol>
-				</section>
-				<section>
-					<h2>C - Un peu plus</h2>
-					<ol>
-						<li>Utilisation réelle ?</li>
-						<li>Est-ce maintenable ?</li>
-						<li>Tests unitaires</li>
-					</ol>
+					<h3>BabylonJS</h3>
+					<p>
+						BabylonJS est un moteur 3D basé sur openGL et fait en Javascript. Il est compatible multi navigateur ( ie11 oui oui, firefox, chrome ) et prend en charge les écrans tactiles.
+					</p>
+					<p>
+						On peut même se baser sur les bones créé via les logiciels de modélisation, on peut donc animer nos personnages ou autre structures assez facilement.
+					</p>
 				</section>
 			</section>
 
 			<section>
-
-				<iframe height='597' scrolling='no' src='//codepen.io/blackratio/embed/MKXwzZ/?height=597&theme-id=1844&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/blackratio/pen/MKXwzZ/'>Babylon - 1-1</a> by blackratio (<a href='http://codepen.io/blackratio'>@blackratio</a>) on <a href='http://codepen.io'>CodePen</a>.
-				</iframe>
-
-			</section>
-
-			<section>
-				<h2>Touch Optimized</h2>
-				<p>
-					Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-				</p>
-			</section>
-
-			<section data-markdown>
-				<script type="text/template">
-					## Markdown support Write content using inline or external Markdown. Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown). ```
-					<section data-markdown>
-						## Markdown support Write content using inline or external Markdown. Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-					</section>
-					```
-				</script>
-			</section>
-
-			<section>
-				<section id="fragments">
-					<h2>Fragments</h2>
-					<p>Hit the next arrow...</p>
-					<p class="fragment">... to step through ...</p>
-					<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-					<aside class="notes">
-						This slide has fragments which are also stepped through in the notes window.
-					</aside>
+				<section>
+					<h2>Concepts de base</h2>
 				</section>
 				<section>
-					<h2>Fragment Styles</h2>
-					<p>There's different types of fragments, like:</p>
-					<p class="fragment grow">grow</p>
-					<p class="fragment shrink">shrink</p>
-					<p class="fragment fade-out">fade-out</p>
-					<p class="fragment current-visible">current-visible</p>
-					<p class="fragment highlight-red">highlight-red</p>
-					<p class="fragment highlight-blue">highlight-blue</p>
+					<h3>Initialiser babylonJS et la scene de rendu</h3>
 				</section>
-			</section>
+				<section>
+					<h3>HTML</h3>
+					<p>On créé un canvas html5 avec un ID dans le DOM</p>
 
-			<section id="transitions">
-				<h2>Transition Styles</h2>
-				<p>
-					You can select from different transitions, like:
-					<br>
-					<a href="?transition=none#/transitions">None</a> -
-					<a href="?transition=fade#/transitions">Fade</a> -
-					<a href="?transition=slide#/transitions">Slide</a> -
-					<a href="?transition=convex#/transitions">Convex</a> -
-					<a href="?transition=concave#/transitions">Concave</a> -
-					<a href="?transition=zoom#/transitions">Zoom</a>
-				</p>
-			</section>
+					<pre><code class="hlhtml" data-trim contenteditable>
+<canvas id="davidooCanvas"></canvas>
+						</code></pre>
+					<q cite="">C'est fini pour l'HTML...</q>
+				</section>
+				<section>
+					<h3>CSS</h3>
+
+					<pre><code class="hlcss" data-trim contenteditable>
+html, body {
+	overflow: hidden;
+	width   : 100%;
+	height  : 100%;
+	margin  : 0;
+	padding : 0;
+}
+
+#davidooCanvas {
+	width   : 100%;
+	height  : 100%;
+	touch-action: none;
+}
+						</code></pre>
+				</section>
+
+				<section>
+					<h3>JS</h3>
+					<pre><code class="hljs" data-trim contenteditable>
+// On va ajouter un Event Listener et encapsuler notre code ce qui nous permetra
+// de charger le code quand le DOM sera entièrrement chargé.
+window.addEventListener('DOMContentLoaded', function() {
+
+	// On attribut la variable canvas à notre élément ajouté dans le DOM
+	var canvas = document.getElementById('davidooCanvas');
+
+	// On charge le moteur BabylonJS lié à notre élément
+	var engine = new BABYLON.Engine(canvas, true);
+
+});
+						</code></pre>
+						<p>Le moteur est initialisé et prêt à fonctionner</p>
+						<p>...</p>
+				</section>
+				<section data-background="http://i.giphy.com/90F8aUepslB84.gif"></section>
+
+		</section>
 
 			<section id="themes">
 				<h2>Themes</h2>
