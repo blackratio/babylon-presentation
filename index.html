@@ -52,15 +52,16 @@
 					<img src="img/js.svg" class="svg">
 				</div>
 				<p>
-					<small>Présenté par Davidou</small>
+					<small>Présenté par DWK</small>
 				</p>
 			</section>
 
 			<section>
 				<section id="fragments">
 					<h2>Introduction</h2>
-					<p class="fragment">1- WebGL</p>
-					<p class="fragment">2- BabylonJS</p>
+					<p class="fragment">OpenGL</p>
+					<p class="fragment">WebGL</p>
+					<p class="fragment">BabylonJS</p>
 				</section>
 				<section id="fragments">
 					<h2>Concepts de base</h2>
@@ -77,9 +78,9 @@
 					<p class="fragment">3- Actions</p>
 				</section>
 				<section>
-					<h2>Infos supplémentaires</h2>
-					<p class="fragment">1- La compatibilité</p>
-					<p class="fragment">2- Les ressources/calculs</p>
+					<h2>Infos complémentaires</h2>
+					<p class="fragment">1- Les avantages</p>
+					<p class="fragment">2- Les inconvéniants</p>
 					<p class="fragment">3- Liens intéssants</p>
 				</section>
 			</section>
@@ -90,9 +91,15 @@
 					<p>Quelques définitions</p>
 				</section>
 				<section>
+					<h3>OpenGL</h3>
+					<p>
+						OpenGL (Open Graphics Library) est un ensemble normalisé de fonctions de calcul d'images 2D ou 3D lancé par Silicon Graphics en 1992 et permet à un programme de déclarer la géométrie d'objets sous forme de points, de vecteurs, de polygones, de bitmaps et de textures. OpenGL effectue ensuite des calculs de projection en vue de déterminer l'image à l'écran, en tenant compte de la distance, de l'orientation, des ombres, de la transparence et du cadrage
+					</p>
+				</section>
+				<section>
 					<h3>WebGL</h3>
 					<p>
-						WebGL est une spécification d'affichage 3D pour les navigateurs web, créée par Khronos Group permettant d'utiliser le standard OpenGL ES via les élements canvas du HTML5
+						WebGL est une spécification d'affichage 3D pour les navigateurs web, créée par Khronos Group permettant d'utiliser le standard OpenGL ES via les élements canvas du HTML5.
 					</p>
 					<h5>Il s'appuie en plus sur différents languages et technologies:</h5>
 					<ul>
@@ -101,15 +108,15 @@
 						<li>Données au format JSON</li>
 						<li>Accélération matérielle pour les calculs et le rendu 3D à l'aide des pilotes OpenGL ES</li>
 					</ul>
-					<p>Christian entrerra plus dans les détails sur ce sujet :-)</p>
 				</section>
 				<section>
 					<h3>BabylonJS</h3>
 					<p>
-						BabylonJS est un moteur 3D basé sur openGL et fait en Javascript. Il est compatible multi navigateur ( ie11 oui oui, firefox, chrome ) et prend en charge les écrans tactiles.
+						BabylonJS est un moteur 3D basé sur openGL et fait en Javascript. Il a été créé en mai 2013 par David Rousset et David Catuhe.
 					</p>
+					<p>Il a été développé pour être simple à utiliser et performant.</p>
 					<p>
-						On peut même se baser sur les bones créé via les logiciels de modélisation, on peut donc animer nos personnages ou autre structures assez facilement.
+						Il y a un support varié de caméras (gamepad, virtual joysticks, device orientation) et un moteur de collisions intégré.
 					</p>
 				</section>
 			</section>
@@ -123,12 +130,13 @@
 				</section>
 				<section>
 					<h3>HTML</h3>
-					<p>On créé un canvas html5 avec un ID dans le DOM</p>
+					<p>On créé une balise html5 canvas avec un ID dans le DOM</p>
 
 					<pre><code class="hlhtml" data-trim contenteditable>
-<canvas id="davidooCanvas"></canvas>
-						</code></pre>
+<canvas id="renderCanvas"></canvas>
+					</code></pre>
 					<q cite="">C'est fini pour l'HTML...</q>
+
 				</section>
 				<section>
 					<h3>CSS</h3>
@@ -153,18 +161,18 @@ html, body {
 				<section>
 					<h3>JS</h3>
 					<pre><code class="hljs" data-trim contenteditable>
-// On va ajouter un Event Listener et encapsuler notre code ce qui nous permetra
-// de charger le code quand le DOM sera entièrrement chargé.
+// On va ajouter un Event Listener et encapsuler notre code ce qui nous permettra
+// de charger le code quand le DOM sera entièrement chargé.
 window.addEventListener('DOMContentLoaded', function() {
 
 	// On attribut la variable canvas à notre élément ajouté dans le DOM
 	var canvas = document.getElementById('davidooCanvas');
 
-	// On charge le moteur BabylonJS lié à notre élément
+	// On charge le moteur BabylonJS lié à notre élément canvas
 	var engine = new BABYLON.Engine(canvas, true);
 
 	// Notre fonction createScene
-	// Tout notre code va se trouver ici!
+	// Tout le code se trouvera encapsulé dans cette fonction!
 	var createScene = function(){
 
 		// On créé notre Object scene
@@ -374,6 +382,38 @@ scene.beginAnimation(box, 0, 200, true);
 
 			<section>
 				<h3>1 - Importer des meshs</h3>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h2>Informations complémentaires</h2>
+			</section>
+
+			<section>
+				<h3>1 - Les avantages</h3>
+				<p>Multi navigateur + IOS</p>
+				<p>Fonctionne avec les devices tactiles et WebVR (Oculus Rift par exemple)</p>
+				<p>Moteur physique oimo.js Open source</p>
+				<p>Léger et puissant -> 874 KB minifié</p>
+				<p>Options d'exports puissants (3dsmax, blender)</p>
+				<p>Gratuit - Licence Apache 2.0</p>
+			</section>
+			<section>
+				<h3>2 - Les inconvéniants</h3>
+				<p>Navigateurs compatible webGL...</p>
+				<p>Code se densifie rapidement quand les scènes deviennent complexes</p>
+				<p>Pas bas niveau, voir three.js</p>
+			</section>
+			<section>
+				<h3>3 - Liens intéressants</h3>
+				<p><a href="http://www.babylonjs.com/">BabylonJS</a></p>
+				<p><a href="https://blogs.msdn.microsoft.com/davrous/2014/11/18/understanding-collisions-physics-by-building-a-cool-webgl-babylon-js-demo-with-oimo-js/">Les collisions</a></p>
+				<p><a href="https://clara.io/library">clara.io</a></p>
+				<p><a href="http://yoda.blob.core.windows.net/wwwbabylonjs/Scenes/espilitphysics/index.html">Demo</a></p>
+			</section>
+			<section>
+				<h2>Merci</h2>
 			</section>
 		</section>
 
