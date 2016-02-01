@@ -74,7 +74,6 @@
 				<section>
 					<h2>Utilisation avancée</h2>
 					<p class="fragment">1- Importer des mesh</p>
-					<p class="fragment">2- Texturing</p>
 					<p class="fragment">3- Actions</p>
 				</section>
 				<section>
@@ -175,9 +174,8 @@ window.addEventListener('DOMContentLoaded', function() {
 	// Tout le code se trouvera encapsulé dans cette fonction!
 	var createScene = function(){
 
-		// On créé notre Object scene
+		// On créé notre Object scene linké à engine
 		var scene = new BABYLON.Scene(engine);
-		scene.clearColor = new BABYLON.Color3( 254, 254, 254);
 
 		// return the created scene
 		return scene;
@@ -187,12 +185,12 @@ window.addEventListener('DOMContentLoaded', function() {
 	// Assigne notre fonction createScene à scene
 	var scene = createScene();
 
-	// Lance le moteur en boucle
+	// Lance le moteur - boucle
 	engine.runRenderLoop(function(){
 		scene.render();
 	});
 
-	// Check si la fenêtre est redimentionnée
+	// Check si la fenêtre est redimensionnée
 	window.addEventListener('resize', function(){
 		engine.resize();
 	});
@@ -243,7 +241,7 @@ ground.material = materialGround;
 
 // Il y a une foncton CreateBox(name, size, scene)
 var box = BABYLON.Mesh.CreateBox("box1", 9.0, scene);
-// On positionne notre cube dans la scene
+// On positionne notre cube dans la scene (x,y,z)
 box.position = new BABYLON.Vector3(10, 8 , -6);
 
 var materialBox = new BABYLON.StandardMaterial("texture1", scene);
@@ -273,7 +271,7 @@ lightDir.intensity = 0.8;
 var lightSphere = BABYLON.Mesh.CreateSphere("sphere", 10, 2, scene);
 lightSphere.position = lightDir.position;
 lightSphere.material = new BABYLON.StandardMaterial("light", scene);
-lightSphere.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
+lightSphere.material.emissiveColor = new BABYLON.Color3(1, 0, 0);
 
 // SpotLight
 var lightSpot = new BABYLON.SpotLight("spot02", new BABYLON.Vector3(30, 40, 20), new BABYLON.Vector3(-1, -2, 0), 1.1, 10, scene);
@@ -297,7 +295,7 @@ lightSphere2.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
 					<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 				</section>
 				<section>
-					<h2>Types de source lumineuse</h2>
+					<h2>Sources lumineuses</h2>
 					<p>PointLight(name, position, scene)</p>
 					<p>DirectionalLight(name, position, scene)</p>
 					<p>SpotLight(name, position, direction, angle, exposition, scene)</p>
@@ -313,10 +311,13 @@ lightSphere2.material.emissiveColor = new BABYLON.Color3(1, 1, 0);
 // Nous allons utiliser la fonction ShadowGenerator et la lier à notre light
 // Paramètres : taille, source de lumière
 var shadowGenerator = new BABYLON.ShadowGenerator(600, lightDir);
-// On souhaite avoir l'ombre de notre box
+
+// On souhaite voir l'ombre de notre box
 shadowGenerator.getShadowMap().renderList.push(box);
+
 // Il ne manque plus qu'à spécifier sur quel élément on souhaite projeter l'ombre
 ground.receiveShadows = true;
+
 // On peut également utiliser des filtres pour notre ombre, ici un blur
 shadowGenerator.useBlurVarianceShadowMap = true;
 
@@ -335,23 +336,24 @@ shadowGenerator.useBlurVarianceShadowMap = true;
 // Paramètre : name, propriété, fps, type of change (float, vector, color, matrix), type of behavior ( loop, constant, relative )
 var animationBox = new BABYLON.Animation("myAnimation", "position", 60, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
 
-// On définie la nouvelle position de notre objet
+// On définie la nouvelle position de notre objet (x,y,z)
 var nextPos = new BABYLON.Vector3(-10, 8 , -6);
 var nextPos2 = new BABYLON.Vector3(-10, 20 , -6);
 
 // On créé un tableau pour nos différentes valeurs
 var keys = [];
 
-// On choisie nos valeurs pour chaque frame, ici 100 au total
-keys.push({
+// On choisie nos valeurs pour chaque frame, 200 dans notre exemple
+keys.push(
+{
 	frame: 0,
 	value: box.position
-});
-keys.push({
+},
+{
 	frame: 100,
 	value: nextPos
-});
-keys.push({
+},
+{
 	frame: 200,
 	value: nextPos2
 });
@@ -382,6 +384,62 @@ scene.beginAnimation(box, 0, 200, true);
 
 			<section>
 				<h3>1 - Importer des meshs</h3>
+				<pre><code class="hljs" data-trim contenteditable>
+
+// On va ajouter un Event Listener et encapsuler notre code ce qui nous permettra
+// de charger le code quand le DOM sera entièrement chargé.
+window.addEventListener('DOMContentLoaded', function() {
+
+	var canvas = document.getElementById("meshimportcanvas");
+	var engine = new BABYLON.Engine(canvas, true);
+
+	BABYLON.SceneLoader.Load("", "scene.babylon", engine, function (newScene) {
+	  // Wait for textures and shaders to be ready
+	  newScene.executeWhenReady(function () {
+		 // Attach camera to canvas inputs
+		 newScene.activeCamera.attachControl(canvas);
+
+		 // Once the scene is loaded, just register a render loop to render it
+		 engine.runRenderLoop(function() {
+			newScene.render();
+		 });
+	  });
+	}, function (progress) {
+		 // To do: give progress feedback to user
+	});
+
+});
+
+					</code></pre>
+
+
+
+				<a target="_blank" href="http://www.babylonjs.com/sandbox/">Sandbox</a>
+			</section>
+			<section>
+				<h3>2 - Actions</h3>
+
+				<pre><code class="hljs" data-trim contenteditable>
+
+// On assigne un actionManager à notre box qui est lié à notre scène
+box.actionManager = new BABYLON.ActionManager(scene);
+// On peut appliquer ensuite n'importe quelle action
+// Ici on va diffuser une lumière rouge via notre lightDir
+box.actionManager.registerAction(new BABYLON.InterpolateValueAction(
+BABYLON.ActionManager.OnPickTrigger, lightDir, "diffuse", BABYLON.Color3.Red(), 1000));
+
+					</code></pre>
+
+			</section>
+			<section>
+				<p data-height="600" data-theme-id="1844" data-slug-hash="dGjORE" data-default-tab="result" data-user="blackratio" class='codepen'>See the Pen <a href='http://codepen.io/blackratio/pen/dGjORE/'>Babylon - actions</a> by blackratio (<a href='http://codepen.io/blackratio'>@blackratio</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+				<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+			</section>
+			<section>
+				<h3>2 - Bones et animations</h3>
+				<p>
+					BabylonJS permet également d'animer des personnages via les bones créé dans un logiciel de modélisation. Les bones sont exportés/importés, on peut ensuite assigner à chaque bones une partie du mesh et donc animer des personnages par exemple.
+				</p>
 			</section>
 		</section>
 
@@ -395,7 +453,7 @@ scene.beginAnimation(box, 0, 200, true);
 				<p>Multi navigateur + IOS</p>
 				<p>Fonctionne avec les devices tactiles et WebVR (Oculus Rift par exemple)</p>
 				<p>Moteur physique oimo.js Open source</p>
-				<p>Léger et puissant -> 874 KB minifié</p>
+				<p>Léger et puissant -> 300 KB minifié</p>
 				<p>Options d'exports puissants (3dsmax, blender)</p>
 				<p>Gratuit - Licence Apache 2.0</p>
 			</section>
@@ -403,14 +461,14 @@ scene.beginAnimation(box, 0, 200, true);
 				<h3>2 - Les inconvéniants</h3>
 				<p>Navigateurs compatible webGL...</p>
 				<p>Code se densifie rapidement quand les scènes deviennent complexes</p>
-				<p>Pas bas niveau, voir three.js</p>
+				<p>Pas de bas niveau, pour des scènes très complexes, voir three.js</p>
 			</section>
 			<section>
 				<h3>3 - Liens intéressants</h3>
-				<p><a href="http://www.babylonjs.com/">BabylonJS</a></p>
-				<p><a href="https://blogs.msdn.microsoft.com/davrous/2014/11/18/understanding-collisions-physics-by-building-a-cool-webgl-babylon-js-demo-with-oimo-js/">Les collisions</a></p>
-				<p><a href="https://clara.io/library">clara.io</a></p>
-				<p><a href="http://yoda.blob.core.windows.net/wwwbabylonjs/Scenes/espilitphysics/index.html">Demo</a></p>
+				<p><a target="_blank" href="http://www.babylonjs.com/">BabylonJS</a></p>
+				<p><a target="_blank"  href="https://blogs.msdn.microsoft.com/davrous/2014/11/18/understanding-collisions-physics-by-building-a-cool-webgl-babylon-js-demo-with-oimo-js/">Les collisions</a></p>
+				<p><a target="_blank" href="https://clara.io/library">clara.io</a></p>
+				<p><a target="_blank" href="http://yoda.blob.core.windows.net/wwwbabylonjs/Scenes/espilitphysics/index.html">Demo</a></p>
 			</section>
 			<section>
 				<h2>Merci</h2>
