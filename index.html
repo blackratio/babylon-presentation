@@ -48,11 +48,11 @@
 				<h5>Moteur 3D open source</h5>
 				<div class="svg_prez_wrapper">
 					<img src="img/html5.svg" class="svg">
-					<img src="img/css3.svg" class="svg">
+					<!--img src="img/css3.svg" class="svg"-->
 					<img src="img/js.svg" class="svg">
 				</div>
 				<p>
-					<small>Présenté par DWK</small>
+					<small>DWK</small>
 				</p>
 			</section>
 
@@ -69,12 +69,12 @@
 					<p class="fragment">2- Caméras</p>
 					<p class="fragment">3- Eléments</p>
 					<p class="fragment">4- Sources de lumière & ombres</p>
-					<p class="fragment">5- Animmations</p>
+					<p class="fragment">5- Animations</p>
 				</section>
 				<section>
 					<h2>Utilisation avancée</h2>
 					<p class="fragment">1- Importer des mesh</p>
-					<p class="fragment">3- Actions</p>
+					<p class="fragment">2- Actions</p>
 				</section>
 				<section>
 					<h2>Infos complémentaires</h2>
@@ -100,9 +100,9 @@
 					<p>
 						WebGL est une spécification d'affichage 3D pour les navigateurs web, créée par Khronos Group permettant d'utiliser le standard OpenGL ES via les élements canvas du HTML5.
 					</p>
-					<h5>Il s'appuie en plus sur différents languages et technologies:</h5>
+					<h5>Il s'appuie sur différents languages et technologies:</h5>
 					<ul>
-						<li>Html5 / Canvas</li>
+						<li>Canvas HTML5 (L'élément canvas est un composant de HTML qui permet d'effectuer des rendus dynamiques d'images bitmap via des scripts)</li>
 						<li>JavaScript</li>
 						<li>Données au format JSON</li>
 						<li>Accélération matérielle pour les calculs et le rendu 3D à l'aide des pilotes OpenGL ES</li>
@@ -113,9 +113,9 @@
 					<p>
 						BabylonJS est un moteur 3D basé sur openGL et fait en Javascript. Il a été créé en mai 2013 par David Rousset et David Catuhe.
 					</p>
-					<p>Il a été développé pour être simple à utiliser et performant.</p>
+					<p>Il a été développé pour être simple d'utilisation et performant.</p>
 					<p>
-						Il y a un support varié de caméras (gamepad, virtual joysticks, device orientation) et un moteur de collisions intégré.
+						Il supporte un nombre varié de caméras (gamepad, virtual joysticks, device orientation...), de lights, de procédés de texturing et un moteur de collisions intégré.
 					</p>
 				</section>
 			</section>
@@ -229,7 +229,7 @@ camera.attachControl(canvas, true);
 				</section>
 				<section>
 					<h3>3 - Elements</h3>
-					<p>On va ajouter un sol et un cube dans notre scene</p>
+					<p>Ajout  d'un sol et d'un cube dans notre scène</p>
 					<pre><code class="hljs" data-trim contenteditable>
 
 // On défini rapidement notre sol ( ground )
